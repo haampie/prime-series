@@ -1,0 +1,7 @@
+{
+    "version": "0.1.0",
+    "command": "g++",
+    "isShellCommand": true,
+    "args": ["-Wall", "-std=c++14", "-O2", "-o", "${fileBasenameNoExtension}", "${file}"],
+    "showOutput": "always"
+}
