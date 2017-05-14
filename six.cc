@@ -29,12 +29,11 @@ inline uint64_t prime2idx(uint64_t idx)
 
 uint64_t count(uint64_t n)
 {
-  if (n < 8) {
-    return 3;
-  }
+  // TODO: what if n < 5?
 
   // Should be somewhat smaller...
   uint64_t size = n / 3;
+  uint64_t count = 2;
 
   std::vector<uint8_t> is_prime(size, true);
 
@@ -44,11 +43,10 @@ uint64_t count(uint64_t n)
     {
       uint64_t p = idx2prime(i);
 
-      // std::cout << p << " is prime\n";
+      std::cout << p << '\n';
 
       for (uint64_t q = p * p, j = prime_to_gap[p % width]; q < n; q += p * gap[j], j = (j + 1) % primes)
       {
-        // std::cout << q << "is not prime \n";
         is_prime[prime2idx(q)] = false;
       }
     }
@@ -56,12 +54,12 @@ uint64_t count(uint64_t n)
 
   for (uint64_t i = 0; idx2prime(i) < n; i++)
     if (is_prime[i])
-      std::cout << idx2prime(i) << '\n';
+      ++count;
 
-  return 0;
+  return count;
 }
 
 int main()
 {
-  count(1000);
+  std::cout << count(10000);
 }
